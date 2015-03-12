@@ -9,4 +9,10 @@ class SessionIntegrationTest < ActionDispatch::IntegrationTest
     assert_select '.ui.message', 'Login Successful'
   end
 
+  test 'cant login' do
+    post_via_redirect login_path, {user: {name: 'evil', password: 'none'}}
+    assert_equal login_path, request.original_fullpath
+    assert_select '.ui.message', 'Wrong Name or Password'
+  end
+
 end
