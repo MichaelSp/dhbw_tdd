@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title TDD
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    .ui.menu
+      =link_to root_path class: 'item' do
+        i.icon.home
+        | Home
+      .menu.right
+        =link_to login_path, class: 'item' do
+          i.icon.lock
+          | Login
+    .ui.three.column.grid.segment
+      .column
+      .column
+        = yield
+      .column
