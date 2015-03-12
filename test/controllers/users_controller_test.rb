@@ -12,6 +12,11 @@ class UsersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:users)
   end
 
+  test 'index looks nice' do
+    get :index
+    assert_select 'table.ui.table'
+  end
+
   def test_new
     get :new
     assert_response :success
