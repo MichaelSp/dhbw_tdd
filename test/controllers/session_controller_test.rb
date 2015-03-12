@@ -13,9 +13,4 @@ class SessionControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  def test_destroy
-    get :destroy
-    assert_response :success
-  end
-
 end

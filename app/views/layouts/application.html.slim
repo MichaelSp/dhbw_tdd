@@ -11,9 +11,14 @@ html
         i.icon.home
         | Home
       .menu.right
-        =link_to login_path, class: 'item' do
-          i.icon.lock
-          | Login
+        -if logged_in?
+          =link_to login_path, class: 'item' do
+            i.icon.lock
+            | Login
+        -else
+          =link_to login_path, class: 'item', method: :delete do
+            i.icon.lock
+            | Logout
     .ui.segment
       - flash.each do |key, value|
         .ui.message class=key

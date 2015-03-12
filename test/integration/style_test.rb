@@ -5,7 +5,6 @@ class StyleTest < ActionDispatch::IntegrationTest
     get root_path
     assert_select '.ui.menu'
     assert_select 'a', 'Home'
-    assert_select 'a', 'Login'
   end
 
 end
