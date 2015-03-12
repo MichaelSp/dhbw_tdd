@@ -41,6 +41,7 @@ group :development, :test do
   gem 'minitest-reporters', '>= 0.5.0'
   gem 'quiet_assets'
 
+  gem 'simplecov', require: false
   gem 'capybara'
   gem 'capybara-selenium'
   gem 'selenium-webdriver'
