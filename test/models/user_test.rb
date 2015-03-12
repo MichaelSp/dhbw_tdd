@@ -7,7 +7,9 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_valid
-    assert user.valid?
+    user.password = 'asodij'
+    user.valid?
+    assert_equal '', user.errors.full_messages.to_sentence
   end
 
   test 'user can store a password' do

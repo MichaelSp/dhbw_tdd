@@ -9,7 +9,7 @@ class SessionControllerTest < ActionController::TestCase
   end
 
   def test_create
-    get :create
+    get :create, {user: {name: 'nobody'}}
     assert_response :success
   end
 
