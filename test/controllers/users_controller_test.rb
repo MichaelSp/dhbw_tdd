@@ -55,4 +55,14 @@ class UsersControllerTest < ActionController::TestCase
 
     assert_redirected_to users_path
   end
+
+  test 'update with invalid data' do
+    put :update, id: user, user: {email: 'abcd'}
+    assert_select 'ul > li', 'Email is invalid'
+  end
+
+  test 'create an invalid user' do
+    post :create, user: {email: 'asd'}
+    assert_select 'ul > li', 'Email is invalid'
+  end
 end
