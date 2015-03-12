@@ -10,4 +10,14 @@ class UserTest < ActiveSupport::TestCase
     assert user.valid?
   end
 
+  test 'user can store a password' do
+    user = User.new
+    assert user.password_digest.blank?
+    assert_respond_to user, :password=
+    assert_respond_to user, :password
+    user.password = '123'
+    user.save!
+    assert_not user.password_digest.blank?
+  end
+
 end
