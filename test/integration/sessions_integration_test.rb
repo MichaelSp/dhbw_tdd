@@ -4,6 +4,13 @@ class SessionsIntegrationTest < ActionDispatch::IntegrationTest
     post_via_redirect login_path, {user: {name: 'admin', password: 'admin'}}
   end
 
+  test 'cant see users index without login' do
+    get_via_redirect root_path
+    assert_nil session[:user]
+    assert_equal login_path, request.original_fullpath
+    assert_select '.ui.message', 'Please login'
+  end
+
   test 'can login' do
     get login_path
     assert_nil session[:user]
@@ -11,6 +18,7 @@ class SessionsIntegrationTest < ActionDispatch::IntegrationTest
     assert_not_nil session[:user]
     assert_equal root_path, request.original_fullpath
     assert_select '.ui.message', 'Login Successful'
+    assert_select 'a', 'Logout'
   end
 
   test 'cant login' do
@@ -22,8 +30,8 @@ class SessionsIntegrationTest < ActionDispatch::IntegrationTest
   test 'can login and logout' do
     visit login_path
     fill_in 'Name', with: users(:admin).name
-    fill_in 'Password', with: users(:admin).password
-    click_on 'Login'
+    fill_in 'Password', with: 'admin'
+    click_on 'Submit'
     page.has_content? 'Login Successful'
     click_on 'Logout'
     page.has_content? 'Logged out'

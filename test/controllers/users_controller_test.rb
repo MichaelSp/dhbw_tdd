@@ -2,6 +2,9 @@ require "test_helper"
 
 class UsersControllerTest < ActionController::TestCase
 
+  setup {
+    session[:user] = users(:admin).id
+  }
   def user
     @user ||= users :one
   end

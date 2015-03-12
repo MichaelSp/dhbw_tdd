@@ -5,7 +5,13 @@ class ApplicationController < ActionController::Base
 
   helper_method :logged_in?
 
+  before_action :authenticate!
+
   def logged_in?
     !session[:user].blank?
+  end
+
+  def authenticate!
+    redirect_to login_path, notice: 'Please login' unless logged_in? || self.class == SessionController
   end
 end
