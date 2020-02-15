@@ -5,6 +5,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user = users(:one)
   end
 
+  test "route to users" do
+    get root_url
+    assert_response :success
+    assert_equal UsersController, controller.class
+    assert_equal "index", controller.action_name
+  end
+
   test "should get index" do
     get users_url
     assert_response :success
