@@ -6,9 +6,13 @@ class SessionsTest < ApplicationSystemTestCase
     fill_in 'Name', with: users(:admin).name
     fill_in 'Password', with: "admin"
     click_on 'Submit'
-    page.has_content? 'Login Successful'
+    assert_selector '.card-panel', text: 'Login Successful'
     click_on 'Logout'
-    page.has_content? 'Logged out'
+    assert_selector '.card-panel', text: 'Please login'
   end
 
+  test 'cant see users index without login' do
+    visit root_path
+    assert_selector '.card-panel', text: 'Please login'
+  end
 end
