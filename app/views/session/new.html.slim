@@ -1,2 +1,14 @@
-h1 Session#new
-p Find me in app/views/session/new.html.slim
+.row
+  .col.l4.offset-l4
+    .card
+      .card-content
+        .card-title Login Page
+        = form_for @user, url: login_path do |f|
+          .field
+            = f.label :name
+            = f.text_field :name
+          .field
+            = f.label :password
+            = f.password_field :password
+          .field
+            = f.submit

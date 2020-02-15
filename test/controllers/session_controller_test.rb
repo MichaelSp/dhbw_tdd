@@ -13,7 +13,10 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
 
   test "should get new" do
     get login_url
-    assert_response :success
+    assert_select '.row > .col.l4.offset-l4 > .card > .card-content > form' do
+      assert_select "input[name='user[name]']"
+      assert_select "input[name='user[password]']"
+    end
   end
 
 end
