@@ -19,4 +19,11 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test 'cant login' do
+    post login_path, params: {user: {name: 'evil', password: 'none'}}
+    assert_response :success
+    assert_select '.card-panel', 'Wrong Name or Password'
+  end
+
+
 end
