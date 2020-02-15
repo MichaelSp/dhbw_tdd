@@ -8,6 +8,8 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
 
   test "should get destroy" do
     delete login_url
+    assert_response :redirect
+    follow_redirect!
     assert_response :success
   end
 
