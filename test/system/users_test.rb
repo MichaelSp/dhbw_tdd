@@ -8,6 +8,7 @@ class UsersTest < ApplicationSystemTestCase
   test "visiting the index" do
     visit users_url
     assert_selector "h1", text: "Listing users"
+    assert_selector "body .container"
   end
 
   test "creating a User" do
