@@ -8,4 +8,15 @@ class NavigationTest < ActionDispatch::IntegrationTest
       assert_select "a", "Login"
     end
   end
+
+  test 'can login' do
+    get login_path
+    assert_nil session[:user]
+    post login_path, params: {user: {name: 'admin', password: 'admin'}}
+    assert_not_nil session[:user]
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
+    assert_select ".card-panel", 'Login Successful'
+  end
 end

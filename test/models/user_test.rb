@@ -10,6 +10,12 @@ class UserTest < ActiveSupport::TestCase
     assert !user.valid? # password is required!
   end
 
+  def test_valid
+    user.password = 'asodij'
+    user.valid?
+    assert_equal '', user.errors.full_messages.to_sentence
+  end
+
   test 'user can store a password' do
     user = User.new
     assert user.password_digest.blank?
