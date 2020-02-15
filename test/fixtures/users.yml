@@ -3,7 +3,7 @@
 admin:
   name: admin
   email: admin@local.host
-  password_digest: "<%= BCrypt::Password.create 'admin', cost: 4 %>"
+  password_digest: <%= BCrypt::Password.create 'admin' %>
 
 one:
   name: MyString

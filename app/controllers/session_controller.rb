@@ -13,6 +13,9 @@ class SessionController < ApplicationController
   end
 
   def destroy
+    redirect_to login_path, notice: 'Not logged in' and return if session[:user].blank?
+    session[:user] = nil
+    redirect_to root_path, notice: 'Logged out'
   end
 
   def new
