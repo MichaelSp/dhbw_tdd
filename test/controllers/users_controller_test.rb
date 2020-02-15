@@ -3,6 +3,7 @@ require 'test_helper'
 class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
+    post login_url, params: {user: {name: "admin", password: "admin"}}
   end
 
   test "route to users" do

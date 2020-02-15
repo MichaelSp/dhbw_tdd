@@ -3,6 +3,10 @@ require "application_system_test_case"
 class UsersTest < ApplicationSystemTestCase
   setup do
     @user = users(:one)
+    visit users_url
+    fill_in "Name", with: "admin"
+    fill_in "Password", with: "admin"
+    click_on "Submit"
   end
 
   test "visiting the index" do
