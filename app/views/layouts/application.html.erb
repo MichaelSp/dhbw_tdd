@@ -19,8 +19,10 @@
           </ul>
         </div>
       </nav>
+      <ul>
       <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, class: "alert alert-info" %>
+          <li class="card-panel <%= {notice: "blue-text", warn: "yellow-text"}[name.to_sym] || "green-text" %>"><%= content_tag :div, msg %></li>
+      </ul>
       <% end %>
       <%= yield %>
     </div>
