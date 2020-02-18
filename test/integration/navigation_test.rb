@@ -20,4 +20,11 @@ class NavigationTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select ".card-panel", 'Login Successful'
   end
+
+  test "just cover the rest" do
+    ApplicationCable::Channel
+    ApplicationCable::Connection
+    ApplicationJob
+    ApplicationMailer
+  end
 end

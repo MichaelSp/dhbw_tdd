@@ -53,4 +53,14 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to users_url
   end
+
+  test 'update with invalid data' do
+    put user_url(@user), params: {user: {email: 'abcd'}}
+    assert_select 'ul > li', 'Email is invalid'
+  end
+
+  test 'create an invalid user' do
+    post users_url, params: {user: {email: 'abcd'}}
+    assert_select 'ul > li', 'Email is invalid'
+  end
 end
