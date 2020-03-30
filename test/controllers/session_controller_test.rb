@@ -7,9 +7,14 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get destroy" do
+    post login_path, params: { user: { name: 'admin', password: 'admin' } }
+    follow_redirect!
+    assert_response :success
     delete login_url
     assert_response :redirect
-    follow_redirect!
+    follow_redirect! # to /
+    assert_response :redirect
+    follow_redirect! # to /login
     assert_response :success
   end
 
@@ -27,5 +32,11 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
     assert_select '.card-panel', 'Wrong Name or Password'
   end
 
-
+  test 'should redirect to login' do
+    get root_url
+    assert_redirected_to login_path
+    follow_redirect!
+    assert_response :success
+    assert_equal 'Please login', flash[:notice]
+  end
 end
