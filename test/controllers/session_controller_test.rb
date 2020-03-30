@@ -7,9 +7,14 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get destroy" do
+    post login_path, params: { user: { name: 'admin', password: 'admin' } }
+    follow_redirect!
+    assert_response :success
     delete login_url
     assert_response :redirect
-    follow_redirect!
+    follow_redirect! # to /
+    assert_response :redirect
+    follow_redirect! # to /login
     assert_response :success
   end
 
