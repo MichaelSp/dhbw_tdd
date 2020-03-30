@@ -32,5 +32,11 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
     assert_select '.card-panel', 'Wrong Name or Password'
   end
 
-
+  test 'should redirect to login' do
+    get root_url
+    assert_redirected_to login_path
+    follow_redirect!
+    assert_response :success
+    assert_equal 'Please login', flash[:notice]
+  end
 end
